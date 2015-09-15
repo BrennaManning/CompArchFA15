@@ -1,0 +1,18 @@
+do hw1.do
+# Model Technology ModelSim PE Student Edition vlog 10.4a Compiler 2015.03 Apr  7 2015
+# Start time: 00:47:46 on Sep 14,2015
+# vlog -reportprogress 300 -work work hw1.v 
+# -- Compiling module hw1test
+# 
+# Top level modules:
+# 	hw1test
+# End time: 00:47:46 on Sep 14,2015, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vsim 
+# Start time: 00:47:48 on Sep 14,2015
+# Loading work.hw1test
+# A B | ~A ~B  | ~(AB) ~A+~B | ~(A+B) ~A~B 
+# 0 0 |  1  1  |   1     1   |   1    1  
+# 0 1 |  1  0  |   1     1   |   0    0  
+# 1 0 |  0  1  |   1     1   |   0    0  
+# 1 1 |  0  0  |   0     0   |   0    0 
