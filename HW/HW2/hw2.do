@@ -1,12 +1,12 @@
-vlog -reportprogress 300 -work work multiplexer.v decoder.v adder.v
-vsim -voptargs="+acc" testDecoder
+vlog -reportprogress 300 -work work multiplexer.v 
+vsim -voptargs="+acc" testMultiplexer
 add wave -position insertpoint  \
-sim:/testDecoder/addr0 \
-sim:/testDecoder/addr1 \
-sim:/testDecoder/enable \
-sim:/testDecoder/out0 \
-sim:/testDecoder/out1 \
-sim:/testDecoder/out2 \
-sim:/testDecoder/out3
+sim:/testMultiplexer/addr0 \
+sim:/testMultiplexer/addr1 \
+sim:/testMultiplexer/in0 \
+sim:/testMultiplexer/in1 \
+sim:/testMultiplexer/in2 \
+sim:/testMultiplexer/in3 \
+sim:/testMultiplexer/out
 run -all
 wave zoom full
