@@ -1,0 +1,31 @@
+CompArch Lab3 Workplan
+
+Meg McCauley, Griffin Tschurwald, Brenna Manning
+
+
+Write Workplan
+<1hr  completed by Saturday 11/10
+
+Assembly Test
+3 hrs completed before Sunday 11/15
+	
+Single Cycle CPU Verilog Modules & Test Benches   Completed by Tuesday 11/17
+Data Memory - 2hrs
+Register File - 2hrs
+ALU -1hr *already have one
+Instruction Fetch Unit - 4.5hrs
+Instruction Decoder - 4 hrs (LUT/other stuff)
+Multiplexers  -2hrs
+
+
+Wire Everything Together & Write Control Signals  2hrs  Completed by 11/18
+
+Final Testing & Debugging 4hrs completed by 11/19
+(when stuff goes wrong)
+
+WriteUp
+2hrs completed by 11/20
+
+Total: ~27Hours
+
+
