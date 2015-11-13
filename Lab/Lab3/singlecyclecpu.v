@@ -1,27 +1,8 @@
 `include datamemory.v
 `include instructionfetchunit.v
+`include mux.v
 
-
-
-module mux(
-	output[31:0] muxout,
-	input muxcontrol,
-	input [31:0] muxin1,
-	input [31:0] muxin2,
-	);
-	if (muxcontrol == 0) begin
-		muxout <= muxin1
-	end
-	if(muxcontrol == 0) begin
-		muxout <= muxin2
-	end
-
-endmodule
-
-
-
-
-
+//currently just inputs and wires based on the day 10 slide 47
 module cpu(
 	input regdst,
 	input regwr,
@@ -52,11 +33,4 @@ module cpu(
 	wire datamemout;
 	wire memmuxout;
 
-
-
-
-
- 
-
-
-`
+endmodule
