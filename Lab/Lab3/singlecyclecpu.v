@@ -1,5 +1,6 @@
 `include datamemory.v
 `include instructionfetchunit.v
+`include alu.v
 
 
 
