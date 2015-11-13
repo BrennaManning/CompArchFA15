@@ -22,13 +22,18 @@ endmodule
 
 
 
-module cpu
-(
-
+module cpu(
+	input regdst,
+	input regwr,
+	input branch,
+	input jump,
+	input alucntrl,
+	input alusrc,
+	input memwr,
+	input memtoreg
 );
 	wire rd;
 	wire rt;
-	wire regdst;
 	wire regAw;
 	wire rs;
 	wire regAa; 
@@ -36,20 +41,15 @@ module cpu
 	wire regDa;
 	wire regDb;
 	wire regDw;
-	wire regWrEn;
 	wire imm16;
 	wire signextendout;
-	wire alusrc;
 	wire alusrcmuxout;
-	wire alucntrl;
 	wire aluzeroflag;
 	wire alures;
 	wire branch;
 	wire jump;
 	wire instrfetchout;
-	wire memwr;
 	wire datamemout;
-	wire memtoreg;
 	wire memmuxout;
 
 
