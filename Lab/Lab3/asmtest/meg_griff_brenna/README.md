@@ -1,5 +1,5 @@
-#
-README for Assembly Test
+#README for Assembly Test
+
 Our assembly program does some fun stuff.
 
 We used 2 instructions outside of the list provided in the lab README. These were “li” and “la”.
@@ -37,7 +37,7 @@ Line 13: $t7 -> 4 because it is loading the value from $t3
 Line 14: $t0 -> 0 because we are loading from the stack pointer + 4 (which has not been set, so it’s zero)
 Line 15: store the value of $t1 (2) to the stack pointer location (shown in the data segment section, far right, see picture)
 
-![sw](/sw_image.png)
+![sw](sw_image.png)
 _Figure 1: The blue highlighted box shows where the value of $t1 changes the stack pointer to 2_
 
 
