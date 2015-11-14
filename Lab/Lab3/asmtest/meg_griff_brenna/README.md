@@ -6,8 +6,10 @@ We used 2 instructions outside of the list provided in the lab README. These wer
 The command “li” loads an immediate number into a register, while the “la” command loads a number into a register from another register. 
 
 If you run the whole program, you should get the following values for these registers that our program changes:
-First Header | Second Header
------------- | -------------
+
+
+Register | Value
+-------|-------------- 
 $t0 | 0x00000000
 $t1 | 0x00000002
 $t2 | 0x00000000
