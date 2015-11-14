@@ -1,0 +1,6 @@
+*
+!work_plan.txt
+!.gitignore
+!*.v
+!*.md
+!*/asmtest
