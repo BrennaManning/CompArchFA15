@@ -3,4 +3,5 @@
 !.gitignore
 !*.v
 !*.md
-!*/asmtest
+!*asmtest/
+!*.asm
