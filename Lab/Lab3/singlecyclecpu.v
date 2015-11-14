@@ -1,6 +1,8 @@
 `include datamemory.v
 `include instructionfetchunit.v
+
 `include mux.v
+`include alu.v
 
 //currently just inputs and wires based on the day 10 slide 47
 module cpu(
