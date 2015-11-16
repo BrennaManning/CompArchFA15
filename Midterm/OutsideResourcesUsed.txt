@@ -1,0 +1,7 @@
+RESOURCES USED:
+
+
+https://eewiki.net/pages/viewpage.action?pageId=13599139
+http://www.allaboutcircuits.com/textbook/digital/chpt-11/synchronous-counters/
+https://eewiki.net/pages/viewpage.action?pageId=4980758
+http://www.daenotes.com/electronics/digital-electronics/flip-flops-types-applications-woking
