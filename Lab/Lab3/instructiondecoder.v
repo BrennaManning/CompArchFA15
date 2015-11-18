@@ -12,14 +12,14 @@ module instructiondecoder(
 	output [1:0] aluop,
 	output alusrc,
 	output regwrite,
-	output lw,
+	output lsw,
 	input [31:0] instruction
 	);
 
 	//instructions to control signals
 
-	wire opcode; //determines what instruction
-	opcode <= instruction [31:26];
+	wire opcode[5:0]; //determines what instruction
+	assign opcode[5:0] = instruction [31:26];
 
 	//ALUOP
 	//00 = ADD
@@ -30,161 +30,161 @@ module instructiondecoder(
 
 
 
-	if (opcode == 6'b000000) begin
-		opcode = instruction [5:0]; //func for r-types
+	if (instruction [31:26] == 6'b000000) begin
+		assign instruction[31:26] = instruction [5:0]; //func for r-types
 	end
 
 	//LW
-	if (opcode == 6'b100011)begin
-		jal <= 1'b0;
- 		regdst <= 1'b0;
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b1;
- 		memwrite <= 1'b0;
- 		aluop <= 2'b00;
- 		alusrc <= 1'b0;
- 		regwrite <= 1'b1;
- 		lw <= 1'b1;
+	if (instruction [31:26] == 6'b100011)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b0;
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b1;
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b00;
+ 		assign alusrc = 1'b0;
+ 		assign regwrite = 1'b1;
+ 		assign lsw = 1'b1;
  	end
 
  	//SW
- 	if (opcode == 6'b101011)begin
-		jal <= 1'b0;
- 		regdst <= 1'b0;
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0;
- 		memwrite <= 1'b1;
- 		aluop <= 2'b00;
- 		alusrc <= 1'b0;
- 		regwrite <= 1'b0;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b101011)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b0;
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0;
+ 		assign memwrite = 1'b1;
+ 		assign aluop = 2'b00;
+ 		assign alusrc = 1'b0;
+ 		assign regwrite = 1'b0;
+ 		assign lsw = 1'b1;
  	end
  	
  	//J
- 	if (opcode == 6'b000010)begin
-		jal <= 1'b0;
- 		regdst <= 1'b0;
- 		branch <= 1'b0;
- 		jump <= 1'b1;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0;
- 		memwrite <= 1'b0;
- 		aluop <= 2'b00;
- 		alusrc <= 1'b0;
- 		regwrite <= 1'b0;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b000010)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b0;
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b1;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0;
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b00;
+ 		assign alusrc = 1'b0;
+ 		assign regwrite = 1'b0;
+ 		assign lsw = 1'b0;
  	end
  	
  	//JR
- 	if (opcode == 6'b000000)begin
-		jal <= 1'b0;
- 		regdst <= 1'b0;
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b1;
- 		memtoreg <= 1'b0;
- 		memwrite <= 1'b0;
- 		aluop <= 2'b00;
- 		alusrc <= 1'b0;
- 		regwrite <= 1'b0;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b000000)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b0;
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b1;
+ 		assign memtoreg = 1'b0;
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b00;
+ 		assign alusrc = 1'b0;
+ 		assign regwrite = 1'b0;
+ 		assign lsw = 1'b0;
  	end
 
   	//JAL
- 	if (opcode == 6'b000011)begin
-		jal <= 1'b1;
- 		regdst <= 1'b0;
- 		branch <= 1'b0;
- 		jump <= 1'b1;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0;
- 		memwrite <= 1'b0;
- 		aluop <= 2'b00;
- 		alusrc <= 1'b0;
- 		regwrite <= 1'b0;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b000011)begin
+		assign jal = 1'b1;
+ 		assign regdst = 1'b0;
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b1;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0;
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b00;
+ 		assign alusrc = 1'b0;
+ 		assign regwrite = 1'b0;
+ 		assign lsw = 1'b0;
  	end
 
   	//BNE
- 	if (opcode == 6'b000101)begin
-		jal <= 1'b0;
- 		regdst <= 1'b0; //0 because I-type
- 		branch <= 1'b1;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0;
- 		memwrite <= 1'b0;
- 		aluop <= 2'b01; //SUBTRACT
- 		alusrc <= 1'b0; //must be 0 -> I-Type using ALU
- 		regwrite <= 1'b0;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b000101)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b0; //0 because I-type
+ 		assign branch = 1'b1;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0;
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b01; //SUBTRACT
+ 		assign alusrc = 1'b0; //must be 0 -> I-Type using ALU
+ 		assign regwrite = 1'b0;
+ 		assign lsw = 1'b0;
  	end
  		 		
  	
   	//XORI
- 	if (opcode == 6'b001110)begin
-		jal <= 1'b0;
- 		regdst <= 1'b0; //0 because I-Type
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0; //False - writing from ALU, not memory
- 		memwrite <= 1'b0;
- 		aluop <= 2'b11; //xor
- 		alusrc <= 1'b0; //0 because I-Type
- 		regwrite <= 1'b1;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b001110)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b0; //0 because I-Type
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0; //False - writing from ALU, not memory
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b11; //xor
+ 		assign alusrc = 1'b0; //0 because I-Type
+ 		assign regwrite = 1'b1;
+ 		assign lsw = 1'b0;
  	end
  		
 
   	//ADD
- 	if (opcode ==)begin
-		jal <= 1'b0;
- 		regdst <= 1'b1; //R-Type
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0; //Writing to Reg from ALU not mem
- 		memwrite <= 1'b0;
- 		aluop <= 2'b00;
- 		alusrc <= 1'b1; //R-Type
- 		regwrite <= 1'b1;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b100000)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b1; //R-Type
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0; //Writing to Reg from ALU not mem
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b00;
+ 		assign alusrc = 1'b1; //R-Type
+ 		assign regwrite = 1'b1;
+ 		assign lsw = 1'b0;
  	end
  		
 
    	//SUB
- 	if (opcode ==)begin
-		jal <= 1'b0;
- 		regdst <= 1'b1; //R-Type
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0; //Writing to Reg from ALU not mem
- 		memwrite <= 1'b0;
- 		aluop <= 2'b01;
- 		alusrc <= 1'b1; //R-Type
- 		regwrite <= 1'b1;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 100010)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b1; //R-Type
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0; //Writing to Reg from ALU not mem
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b01;
+ 		assign alusrc = 1'b1; //R-Type
+ 		assign regwrite = 1'b1;
+ 		assign lsw = 1'b0;
  	end
 
   	//SLT
- 	if (opcode ==)begin
-		jal <= 1'b0;
- 		regdst <= 1'b1; //R-Type
- 		branch <= 1'b0;
- 		jump <= 1'b0;
- 		jr <= 1'b0;
- 		memtoreg <= 1'b0; //Writing to Reg from ALU not mem
- 		memwrite <= 1'b0;
- 		aluop <= 2'b10;
- 		alusrc <= 1'b1; //R-Type
- 		regwrite <= 1'b1;
- 		lw <= 1'b0;
+ 	if (instruction [31:26] == 6'b101010)begin
+		assign jal = 1'b0;
+ 		assign regdst = 1'b1; //R-Type
+ 		assign branch = 1'b0;
+ 		assign jump = 1'b0;
+ 		assign jr = 1'b0;
+ 		assign memtoreg = 1'b0; //Writing to Reg from ALU not mem
+ 		assign memwrite = 1'b0;
+ 		assign aluop = 2'b10;
+ 		assign alusrc = 1'b1; //R-Type
+ 		assign regwrite = 1'b1;
+ 		assign lsw = 1'b0;
  	end
 
  		
