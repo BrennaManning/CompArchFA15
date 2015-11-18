@@ -1,4 +1,4 @@
-//general purpose mux
+//general purpose 2 input mux
 module mux(
 	output[31:0] muxout,
 	input muxcontrol,
@@ -8,7 +8,7 @@ module mux(
 	if (muxcontrol == 0) begin
 		muxout <= muxin1
 	end
-	if(muxcontrol == 0) begin
+	if(muxcontrol != 0) begin
 		muxout <= muxin2
 	end
 
