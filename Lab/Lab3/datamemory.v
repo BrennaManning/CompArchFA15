@@ -5,26 +5,19 @@
 //   If writeEnable is true, writes dataIn to mem[address]
 //------------------------------------------------------------------------
 
-
-
 //Data Memory module reused from CompArch Lab 2
 
 module datamemory
-#(
-    parameter addresswidth  = 7,
-    parameter depth         = 2**addresswidth,
-    parameter width         = 8
-)
 (
-    input 		                clk,
-    output reg [width-1:0]      dataOut,
-    input [addresswidth-1:0]    address,
+    input  clk,
+    output reg [31:0]      dataOut,
+    input [31:0]    address,
     input                writeEnable,
-    input [width-1:0]           dataIn
+    input [31:0]           dataIn
 );
 
 
-    reg [width-1:0] memory [depth-1:0];
+    reg [31:0] memory [4294967295:0];
 
     always @(posedge clk) begin
         if(writeEnable) begin
