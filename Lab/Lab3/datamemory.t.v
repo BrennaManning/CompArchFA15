@@ -5,8 +5,13 @@
 // or broken register files, and verifying that it correctly identifies each
 //------------------------------------------------------------------------------
 
-module datamemorytestbenchharness();
+module datamemorytestbenchharness(
+output reg dutPassed,
+output reg testDone,
+input startTests
+);
 
+dutPassed = 1;
   //instantiate the wires for the data memory
   wire clk;
   wire[31:0] dataOut;
@@ -42,7 +47,7 @@ module datamemorytestbenchharness();
   );
 
   // Test harness asserts 'begintest' for 1000 time steps, starting at time 10
-  initial begin
+  always @(posedge startTests) begin
     begintest=0;
     #10;
     begintest=1;
@@ -51,7 +56,9 @@ module datamemorytestbenchharness();
 
   // Display test results ('dutpassed' signal) once 'endtest' goes high
   always @(posedge endtest) begin
+    dutPassed = dutpassed;
     $display("DUT passed?: %b", dutpassed);
+    testDone = endtest;
   end
 
 endmodule
