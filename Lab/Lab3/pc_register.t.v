@@ -74,7 +74,7 @@ module pc_reg_test_bench
 		$display("Test case 0 failed");
 	end
 
-	//All done! Short delay and then signal test completion
+	//All done! Short delay and then signal that the test is completed
 	#5
 	endtest = 1;
 end
