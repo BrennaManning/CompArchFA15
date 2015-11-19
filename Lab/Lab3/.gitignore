@@ -2,6 +2,7 @@
 !work_plan.txt
 !.gitignore
 !*.v
+!*.do
 !*.md
 !*/
 !*.asm
