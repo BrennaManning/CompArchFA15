@@ -54,9 +54,9 @@ wire clk;
     .clk(clk)
   );
 
-  // Test harness asserts 'begintest' for 1000 time steps, starting at time 10
-  initial begin
+  always @(posedge startTests) begin
     begintest=0;
+    dutPassed = 1;
     #10;
     begintest=1;
     #1000;
@@ -64,8 +64,11 @@ wire clk;
 
   // Display test results ('dutpassed' signal) once 'endtest' goes high
   always @(posedge endtest) begin
+    dutPassed = dutpassed;
     $display("DUT passed?: %b", dutpassed);
+    testDone = endtest;
   end
+
 
 endmodule
 
