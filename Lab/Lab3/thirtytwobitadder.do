@@ -1,7 +1,8 @@
 vdel - lib work - all
-vlib work
+vlib work
 
-vlog -reportprogress 300 -work work thirtytwobitadder.t.v
+
+vlog -reportprogress 300 -work work thirtytwobitadder.v thirtytwobitadder.t.v
 vsim -voptargs="+acc" addertestharness
 
 
