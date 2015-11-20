@@ -199,9 +199,11 @@ output reg [31:0] instruction
     	dutpassed = 0;
 	$display("Test Case 11 Failed: Returned High when given false instruction");
     end
-
+    #100
     if (dutpassed == 1)begin
 	$display("Instruction decoder test bench passed");
+	endtest = 1;
     end
 
+    end
 endmodule
