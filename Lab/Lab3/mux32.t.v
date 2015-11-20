@@ -1,12 +1,15 @@
 
 `include "mux32.v"
 
-module mux32testharness();
+module mux32testharness(
+    output reg dutPassed,
+    output reg testDone,
+    input startTests);
 
-    wire [31:0] muxout,
-    wire muxcontrol,
-    wire [31:0] muxin1,
-    wire [31:0] muxin2,
+    wire [31:0] muxout;
+    wire muxcontrol;
+    wire [31:0] muxin1;
+    wire [31:0] muxin2;
 	
   
 
@@ -35,15 +38,17 @@ module mux32testharness();
   );
 
     // Test harness asserts 'begintest' for 1000 time steps, starting at time 10
-  initial begin
+  always @(posedge startTests) begin
     begintest=0;
+    dutPassed = 1;
 	#10
     begintest=1;
- 
+ 	
   end
-
   // Display test results ('dutpassed' signal) once 'endtest' goes high
   always @(posedge endtest) begin
+	dutPassed = dutpassed;
+	testDone = endtest;
     $display("DUT passed?: %b", dutpassed);
   end
 
@@ -93,4 +98,10 @@ output reg muxcontrol
 	dutpassed = 0;
 	$display("Test Case 2 Failed");
     end
+
+   if (dutpassed == 1) begin
+	$display("Mux testbench passed!");
+	endtest = 1;
+	end
+end
 endmodule

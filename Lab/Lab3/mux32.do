@@ -1,17 +1,14 @@
-vdel - lib work - all
-vlib work
-
-vlog -reportprogress 300 -work work mux32.t.v
+vlog -reportprogress 500 -work work mux32.t.v 
 vsim -voptargs="+acc" mux32testharness
 
-add wave -position insertpoint/  \
-sim:/instructiondecodertestharness/muxcontrol \
-sim:/instructiondecodertestharness/muxin1 \
-sim:/instructiondecodertestharness/muxin2 \
-sim:/instructiondecodertestharness/muxout \
-sim:/instructiondecodertestharness/begintest \
-sim:/instructiondecodertestharness/dutpassed \
-
+add wave -position insertpoint  \
+sim:/mux32testharness/muxin1 \
+sim:/mux32testharness/muxin2 \
+sim:/mux32testharness/muxcontrol \
+sim:/mux32testharness/muxout \
+sim:/mux32testharness/begintest \
+sim:/mux32testharness/endtest \
+sim:/mux32testharness/dutpassed 
 run -all
 
 wave zoom full

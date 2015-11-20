@@ -13,6 +13,13 @@ wire registerFileDone;
 
 wire instructionDecoderDUT;
 wire instructionDecoderDone;
+
+wire mux32DUT;
+wire mux32Done;
+
+wire mux5DUT;
+wire mux5Done;
+
 //set up the test bench harness for the data memory
 datamemorytestbenchharness dataMemoryTester(
   .dutPassed(dataMemoryDUT),
@@ -35,6 +42,22 @@ instructiondecodertestharness instructionDecoderTester(
 .startTests(startTests)
 );
 
+
+//harness for 32 bit 2:1 mux
+mux32testharness mux32Tester(
+.dutPassed(mux32DUT),
+.testDone(mux32Done),
+.startTests(startTests)
+);
+
+//harness for 5 bit 2:1 mux
+mux5testharness mux5Tester(
+.dutPassed(mux5DUT),
+.testDone(mux5Done),
+.startTests(startTests)
+);
+
+
 //now when datamemory test is done, check our succes wire
 always @(posedge dataMemoryDone) begin
     $display("datamemory DUT passed?: %b", dataMemoryDUT);
@@ -56,9 +79,28 @@ end
 
 //now when instruction decoder test is done, check our succes wire
 always @(posedge instructionDecoderDone) begin
-    $display("registerFile DUT passed?: %b", registerFileDUT);
+    $display("registerFile DUT passed?: %b", instructionDecoderDUT);
     if (instructionDecoderDUT === 0) begin
-	$display("register file failed tests");
+	$display("instruction decoder failed tests");
+    	allTestsPass <= 0;
+    end
+end
+
+//now when 32bit mux test is done, check our succes wire
+always @(posedge mux32Done) begin
+    $display("mux32 DUT passed?: %b", mux32DUT);
+    if (mux32DUT === 0) begin
+	$display("32 bit mux file failed tests");
+    	allTestsPass <= 0;
+    end
+end
+
+
+//now when 5bit mux test is done, check our succes wire
+always @(posedge mux5Done) begin
+    $display("mux5 DUT passed?: %b", mux5DUT);
+    if (mux32DUT === 0) begin
+	$display("5 bit mux failed tests");
     	allTestsPass <= 0;
     end
 end

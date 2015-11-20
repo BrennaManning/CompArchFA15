@@ -1,25 +1,16 @@
-//general purpose 2 input mux
+//general purpose 2 input 32bit mux
 module mux32(
-	output[31:0] muxout,
+	output reg[31:0] muxout,
 	input muxcontrol,
 	input [31:0] muxin1,
 	input [31:0] muxin2
 	);
-	integer i;
 	
 
-		if (muxcontrol == 0) begin
-			for (i = 0; i < 32; i = i + 1)begin
-				muxout [i]   = muxin1 [i]  ;
-			end
-		end
-	
-		else begin
-			for (i = 0; i < 32; i = i + 1)begin
-				muxout[i] = muxin2 [i];
-			end
-
-		end
+	always @ (muxin1 or muxin2 or muxcontrol)
+	begin
+	if (muxcontrol == 1'b0) muxout = muxin1;
+	else muxout = muxin2;
 	end
-
 endmodule
+	
