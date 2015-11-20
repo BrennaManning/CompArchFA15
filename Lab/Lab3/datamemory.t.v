@@ -11,7 +11,6 @@ output reg testDone,
 input startTests
 );
 
-dutPassed = 1;
   //instantiate the wires for the data memory
   wire clk;
   wire[31:0] dataOut;
@@ -49,6 +48,7 @@ dutPassed = 1;
   // Test harness asserts 'begintest' for 1000 time steps, starting at time 10
   always @(posedge startTests) begin
     begintest=0;
+    dutPassed = 1;
     #10;
     begintest=1;
     #1000;

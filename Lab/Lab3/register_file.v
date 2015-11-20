@@ -2,12 +2,12 @@
 module register_file
 (
 input WrEn,
-input[32:0] Dw,
-input[32:0] Aw,
-input[32:0] Aa,
-input[32:0] Ab,
-output reg[32:0] Da,
-output reg[32:0] Db,
+input[31:0] Dw,
+input[31:0] Aw,
+input[31:0] Aa,
+input[31:0] Ab,
+output reg[31:0] Da,
+output reg[31:0] Db,
 input clk 
 );
 

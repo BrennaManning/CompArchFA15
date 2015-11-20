@@ -1,3 +1,4 @@
+
 //test bench for the data memory
 //comparch lab 3
 //------------------------------------------------------------------------------
@@ -5,16 +6,19 @@
 // or broken register files, and verifying that it correctly identifies each
 //------------------------------------------------------------------------------
 
-module registerfiletestbenchharness();
-
+module registerfiletestbenchharness(
+output reg dutPassed,
+output reg testDone,
+input startTests
+);
   //instantiate the wires for the register
 wire WrEn;
-wire[32:0] Dw;
-wire[32:0] Aw;
-wire[32:0] Aa;
-wire[32:0] Ab;
-wire[32:0] Da;
-wire[32:0] Db; // Enable writing of register when High
+wire[31:0] Dw;
+wire[31:0] Aw;
+wire[31:0] Aa;
+wire[31:0] Ab;
+wire[31:0] Da;
+wire[31:0] Db; // Enable writing of register when High
 wire clk;
   
   //wires for the tester
@@ -86,12 +90,12 @@ output reg 		dutpassed,	// Signal test result
 
 // Register File DUT connections
 output reg WrEn,
-output reg[32:0] Dw,
-output reg[32:0] Aw,
-output reg[32:0] Aa,
-output reg[32:0] Ab,
-input[32:0] Da,
-input[32:0] Db,
+output reg[31:0] Dw,
+output reg[31:0] Aw,
+output reg[31:0] Aa,
+output reg[31:0] Ab,
+input[31:0] Da,
+input[31:0] Db,
 output reg	clk
 );
 

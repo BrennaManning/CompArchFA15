@@ -1,15 +1,11 @@
-vlog -reportprogress 500 -work work datamemory.t.v datamemory.v
-vsim -voptargs="+acc" datamemorytestbenchharness
+vlog -reportprogress 500 -work work datamemory.t.v datamemory.v allModules.t.v
+vsim -voptargs="+acc" allTestBenchesHarness
 
 add wave -position insertpoint  \
-sim:/datamemorytestbenchharness/dataOut \
-sim:/datamemorytestbenchharness/address \
-sim:/datamemorytestbenchharness/dataIn \
-sim:/datamemorytestbenchharness/writeEnable \
-sim:/datamemorytestbenchharness/clk \
-sim:/datamemorytestbenchharness/begintest \
-sim:/datamemorytestbenchharness/endtest \
-sim:/datamemorytestbenchharness/dutpassed
+sim:/allTestBenchesHarness/startTests \
+sim:/allTestBenchesHarness/dataMemoryDUT \
+sim:/allTestBenchesHarness/dataMemoryDone 
+
 run -all
 
 wave zoom full
