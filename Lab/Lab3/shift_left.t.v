@@ -1,4 +1,9 @@
-module shift_left_test_bench_harness();
+`include "shift_left.v"
+module shift_left_test_bench_harness(
+output reg dutPassed,
+output reg testDone,
+input startTests
+);
 
 	//wires for shift_left
 	wire[31:0]	sign_ext;
@@ -24,15 +29,18 @@ module shift_left_test_bench_harness();
 		);
 
 	//delay for 10 time steps and then begin test
-	initial begin
+	always@(posedge startTests)begin
 		begintest = 0;
+		dutPassed =1;
 		#10
 		begintest = 1;
 	end
 
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
+		dutPassed = dutpassed;
 		$display("DUT passed?: %b", dutpassed);
+		testDone = endtest;
 	end
 
 endmodule

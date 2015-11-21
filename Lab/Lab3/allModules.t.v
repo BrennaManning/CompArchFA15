@@ -29,6 +29,12 @@ wire raDone;
 wire aluDUT;
 wire aluDone;
 
+wire shiftLeftDUT;
+wire shiftLeftDone;
+
+wire concatenateDUT;
+wire concatenateDone;
+
 //set up the test bench harness for the data memory
 datamemorytestbenchharness dataMemoryTester(
   .dutPassed(dataMemoryDUT),
@@ -86,6 +92,21 @@ alu_test_bench_harness aluTester(
 .testDone(aluDone),
 .startTests(startTests)
 );
+
+//harness for shiftleft
+shift_left_test_bench_harness shiftLeftTester(
+.dutPassed(shiftLeftDUT),
+.testDone(shiftLeftDone),
+.startTests(startTests)
+);
+
+//harness for concatenate
+concatenate_test_bench_harness concatenateTester(
+.dutPassed(concatenateDUT),
+.testDone(concatenateDone),
+.startTests(startTests)
+);
+
 
 //now when datamemory test is done, check our succes wire
 always @(posedge dataMemoryDone) begin
@@ -161,6 +182,25 @@ always @(posedge aluDone) begin
     	allTestsPass <= 0; 
     end
 end
+
+//now when shift left test is done, check our succes wire
+always @(posedge shiftLeftDone) begin
+    $display("Shift Left DUT passed?: %b", shiftLeftDUT);
+    if (shiftLeftDUT === 0) begin
+	$display("Shift Left failed tests");
+    	allTestsPass <= 0; 
+    end
+end
+
+//now when concatenate test is done, check our succes wire
+always @(posedge concatenateDone) begin
+    $display("Concatenate DUT passed?: %b", concatenateDUT);
+    if (concatenateDUT === 0) begin
+    $display("Concatenate failed tests");
+        allTestsPass <= 0; 
+    end
+end
+
 
 
 //=====================start all tests===========================

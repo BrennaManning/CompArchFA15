@@ -9,7 +9,7 @@ module instructiondecoder(
 	output reg jr,
 	output reg memtoreg,
 	output reg memwrite,
-	output reg [1:0] aluop,
+	output reg [2:0] aluop,
 	output reg alusrc,
 	output reg regwrite,
 	output reg lsw,
@@ -22,7 +22,7 @@ module instructiondecoder(
 	//assign opcode[5:0] = instruction[31:26];
 
 	//ALUOP
-	//00 = ADD
+	//000 = ADD
 	//01 = SUB
 	//10 = SLT
 	//11 = XORI  
@@ -46,7 +46,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b1;
  		memwrite = 1'b0;
- 		aluop = 2'b00;
+ 		aluop = 3'b000;
  		alusrc = 1'b0;
  		regwrite = 1'b1;
  		lsw = 1'b1;
@@ -61,7 +61,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0;
  		memwrite = 1'b1;
- 		aluop = 2'b00;
+ 		aluop = 3'b000;
  		alusrc = 1'b0;
  		regwrite = 1'b0;
  		lsw = 1'b1;
@@ -76,7 +76,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0;
  		memwrite = 1'b0;
- 		aluop = 2'b00;
+ 		aluop = 3'b000;
  		alusrc = 1'b0;
  		regwrite = 1'b0;
  		lsw = 1'b0;
@@ -91,7 +91,7 @@ module instructiondecoder(
  		jr = 1'b1;
  		memtoreg = 1'b0;
  		memwrite = 1'b0;
- 		aluop = 2'b00;
+ 		aluop = 3'b000;
  		alusrc = 1'b0;
  		regwrite = 1'b0;
  		lsw = 1'b0;
@@ -106,7 +106,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0;
  		memwrite = 1'b0;
- 		aluop = 2'b00;
+ 		aluop = 3'b000;
  		alusrc = 1'b0;
  		regwrite = 1'b0;
  		lsw = 1'b0;
@@ -121,7 +121,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0;
  		memwrite = 1'b0;
- 		aluop = 2'b01; //SUBTRACT
+ 		aluop = 3'b001; //SUBTRACT
  		alusrc = 1'b0; //must be 0 -> I-Type using ALU
  		regwrite = 1'b0;
  		lsw = 1'b0;
@@ -137,7 +137,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0; //False - writing from ALU, not memory
  		memwrite = 1'b0;
- 		aluop = 2'b11; //xor
+ 		aluop = 3'b010; //xor
  		alusrc = 1'b0; //0 because I-Type
  		regwrite = 1'b1;
  		lsw = 1'b0;
@@ -153,7 +153,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0; //Writing to Reg from ALU not mem
  		memwrite = 1'b0;
- 		aluop = 2'b00;
+ 		aluop = 3'b000;
  		alusrc = 1'b1; //R-Type
  		regwrite = 1'b1;
  		lsw = 1'b0;
@@ -169,7 +169,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0; //Writing to Reg from ALU not mem
  		memwrite = 1'b0;
- 		aluop = 2'b01;
+ 		aluop = 3'b001;
  		alusrc = 1'b1; //R-Type
  		regwrite = 1'b1;
  		lsw = 1'b0;
@@ -184,7 +184,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0; //Writing to Reg from ALU not mem
  		memwrite = 1'b0;
- 		aluop = 2'b10;
+ 		aluop = 2'b011;
  		alusrc = 1'b1; //R-Type
  		regwrite = 1'b1;
  		lsw = 1'b0;

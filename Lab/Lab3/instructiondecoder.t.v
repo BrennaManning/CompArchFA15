@@ -121,7 +121,7 @@ output reg [31:0] instruction
     //TEST CASE 1: LW
     instruction = 32'b10001100000000000000000000000000;
 	
-    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b1)) || (memwrite != 1'b0)) || (aluop != 2'b00)) || (alusrc != 1'b0)) || (regwrite != 1'b1)) || (lsw != 1'b1))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b1)) || (memwrite != 1'b0)) || (aluop != 3'b000)) || (alusrc != 1'b0)) || (regwrite != 1'b1)) || (lsw != 1'b1))begin
     	dutpassed = 0;
     	$display("Test Case 1 Failed: Load Word Instruction");
     end
@@ -129,7 +129,7 @@ output reg [31:0] instruction
     //TEST CASE 2: SW
     instruction = 32'b10101100000000000000000000000000;
 	
-    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 2'b00)) || (alusrc != 1'b0)) || (regwrite != 1'b0)) || (lsw != 1'b1))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 3'b000)) || (alusrc != 1'b0)) || (regwrite != 1'b0)) || (lsw != 1'b1))begin
     	dutpassed = 0;
     	$display("Test Case 2 Failed: Store Word Instruction");
     end
@@ -157,14 +157,14 @@ output reg [31:0] instruction
 
     //TEST CASE 6: BNE 
     instruction = 32'b00010100000000000000000000000000;
-    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b1))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 2'b01)) || (alusrc != 1'b0)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b1))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 3'b001)) || (alusrc != 1'b0)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
     	dutpassed = 0;
     	$display("Test Case 6 Failed: BNE Instruction");
     end
 
     //TEST CASE 7: XORI 
     instruction = 32'b00111000000000000000000000000000;
-    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 2'b11)) || (alusrc != 1'b0)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b0))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 3'b010)) || (alusrc != 1'b0)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
     	dutpassed = 0;
     	$display("Test Case 7 Failed: XORI Instruction ");
     end
@@ -172,7 +172,7 @@ output reg [31:0] instruction
 
     //TEST CASE 8: ADD 
     instruction = 32'b00000000000000000000000000100000;
-    if (((((((((((jal != 1'b0)||(regdst != 1'b1))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 2'b00)) || (alusrc != 1'b1)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b1))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 3'b000)) || (alusrc != 1'b1)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
     	dutpassed = 0;
     	$display("Test Case 8 Failed: Add Instruction ");
     end
@@ -180,7 +180,7 @@ output reg [31:0] instruction
 
     //TEST CASE 9: SUB
     instruction = 32'b00000000000000000000000000100010;
-    if (((((((((((jal != 1'b0)||(regdst != 1'b1))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 2'b01)) || (alusrc != 1'b1)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b1))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 3'b001)) || (alusrc != 1'b1)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
     	dutpassed = 0;
     	$display("Test Case 9 Failed: Sub Instruction ");
     end
@@ -188,14 +188,14 @@ output reg [31:0] instruction
 
     //TEST CASE 10: SLT
     instruction = 32'b00000000000000000000000000001110;
-    if (((((((((((jal != 1'b0)||(regdst != 1'b1))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 2'b10)) || (alusrc != 1'b1)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
+    if (((((((((((jal != 1'b0)||(regdst != 1'b1))||(branch != 1'b0))||(jump != 1'b0))||(jr != 1'b0)) || (memtoreg != 1'b0)) || (memwrite != 1'b1)) || (aluop != 3'b011)) || (alusrc != 1'b1)) || (regwrite != 1'b0)) || (lsw != 1'b0))begin
     	dutpassed = 0;
     	$display("Test Case 10 Failed: SLT Instruction ");
     end
 
     //TEST CASE 11: False Instruction
     instruction = 32'b11111111111111111111111111111111;
-    if (((((((((((jal == 1'b1)||(regdst == 1'b1))||(branch == 1'b1))||(jump == 1'b1))||(jr == 1'b1)) || (memtoreg == 1'b1)) || (memwrite == 1'b1)) || (aluop == 2'b10)) || (alusrc == 1'b1)) || (regwrite == 1'b0)) || (lsw == 1'b0))begin
+    if (((((((((((jal == 1'b1)||(regdst == 1'b1))||(branch == 1'b1))||(jump == 1'b1))||(jr == 1'b1)) || (memtoreg == 1'b1)) || (memwrite == 1'b1)) || (aluop == 3'b000)) || (alusrc == 1'b1)) || (regwrite == 1'b0)) || (lsw == 1'b0))begin
     	dutpassed = 0;
 	$display("Test Case 11 Failed: Returned High when given false instruction");
     end
