@@ -35,6 +35,9 @@ wire shiftLeftDone;
 wire concatenateDUT;
 wire concatenateDone;
 
+wire signExtendDUT;
+wire signExtendDone;
+
 //set up the test bench harness for the data memory
 datamemorytestbenchharness dataMemoryTester(
   .dutPassed(dataMemoryDUT),
@@ -104,6 +107,14 @@ shift_left_test_bench_harness shiftLeftTester(
 concatenate_test_bench_harness concatenateTester(
 .dutPassed(concatenateDUT),
 .testDone(concatenateDone),
+.startTests(startTests)
+);
+
+
+//harness for sign extend
+sign_extend_test_bench_harness signExtendTester(
+.dutPassed(signExtendDUT),
+.testDone(signExtendDone),
 .startTests(startTests)
 );
 
@@ -202,6 +213,13 @@ always @(posedge concatenateDone) begin
 end
 
 
+always @(posedge signExtendDone) begin
+    $display("Sign Extend DUT passed?: %b", concatenateDUT);
+    if (signExtendDUT === 0) begin
+    $display("Sign Extend failed tests");
+        allTestsPass <= 0; 
+    end
+end
 
 //=====================start all tests===========================
 initial begin
