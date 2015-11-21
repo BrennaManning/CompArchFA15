@@ -1,7 +1,11 @@
 //test bench for $ra register
 //comparch lab 3
-
-module ra_register_test_bench_harness();
+`include "ra_register.v"
+module ra_register_test_bench_harness(
+	output reg dutPassed,
+	output reg testDone,
+	input startTests
+);
 
 	//wires for ra_register
 	wire[31:0]	ra_reg_in;
@@ -30,15 +34,17 @@ module ra_register_test_bench_harness();
 		);
 
 	//delay for 10 time steps and then begin test
-	initial begin
+	always @(posedge startTests)begin
 		begintest = 0;
 		#10
 		begintest = 1;
 	end
-
+	
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
+		dutPassed = dutpassed;
 		$display("DUT passed?: %b", dutpassed);
+		testDone = endtest;
 	end
 
 endmodule

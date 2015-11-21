@@ -20,6 +20,15 @@ wire mux32Done;
 wire mux5DUT;
 wire mux5Done;
 
+wire pcDUT;
+wire pcDone;
+
+wire raDUT;
+wire raDone;
+
+wire aluDUT;
+wire aluDone;
+
 //set up the test bench harness for the data memory
 datamemorytestbenchharness dataMemoryTester(
   .dutPassed(dataMemoryDUT),
@@ -57,6 +66,26 @@ mux5testharness mux5Tester(
 .startTests(startTests)
 );
 
+//harness for pc register
+pc_register_test_bench_harness pcTester(
+.dutPassed(pcDUT),
+.testDone(pcDone),
+.startTests(startTests)
+);
+
+//harness for ra register
+ra_register_test_bench_harness raTester(
+.dutPassed(raDUT),
+.testDone(raDone),
+.startTests(startTests)
+);
+
+//harness for alu
+alu_test_bench_harness aluTester(
+.dutPassed(aluDUT),
+.testDone(aluDone),
+.startTests(startTests)
+);
 
 //now when datamemory test is done, check our succes wire
 always @(posedge dataMemoryDone) begin
@@ -104,6 +133,35 @@ always @(posedge mux5Done) begin
     	allTestsPass <= 0;
     end
 end
+
+
+//now when pc register test is done, check our succes wire
+always @(posedge pcDone) begin
+    $display("PC DUT passed?: %b", pcDUT);
+    if (pcDUT === 0) begin
+	$display("PC failed tests");
+    	allTestsPass <= 0; 
+    end
+end
+
+//now when ra register test is done, check our succes wire
+always @(posedge raDone) begin
+    $display("RA DUT passed?: %b", raDUT);
+    if (raDUT === 0) begin
+	$display("RA failed tests");
+    	allTestsPass <= 0; 
+    end
+end
+
+//now when alutest is done, check our succes wire
+always @(posedge aluDone) begin
+    $display("ALU DUT passed?: %b", aluDUT);
+    if (aluDUT === 0) begin
+	$display("ALU failed tests");
+    	allTestsPass <= 0; 
+    end
+end
+
 
 //=====================start all tests===========================
 initial begin

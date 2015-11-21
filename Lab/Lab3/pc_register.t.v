@@ -1,7 +1,11 @@
 //test bench for the program counter register
 //comparch lab 3
-
-module pc_register_test_bench_harness();
+`include "pc_register.v"
+module pc_register_test_bench_harness(
+output reg dutPassed,
+output reg testDone,
+input startTests
+);
 
 	//wires needed for the pc_register
 	wire[31:0] pc_reg_in;
@@ -27,7 +31,7 @@ module pc_register_test_bench_harness();
 		);
 
 	//delay 10 time steps and then begin test
-	initial begin
+	always@(posedge startTests)begin
 		begintest = 0;
 		#10;
 		begintest = 1;
@@ -35,7 +39,9 @@ module pc_register_test_bench_harness();
 
 	//final test results displayed when 'endtest' is high
 	always @(posedge endtest) begin
+		dutPassed = dutpassed;
 		$display("DUT passed?: %b", dutpassed);
+		testDone = endtest;
 	end
 
 endmodule
