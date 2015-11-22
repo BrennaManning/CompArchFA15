@@ -140,7 +140,7 @@ end
 
 //now when instruction decoder test is done, check our succes wire
 always @(posedge instructionDecoderDone) begin
-    $display("registerFile DUT passed?: %b", instructionDecoderDUT);
+    $display("instructiondecoder DUT passed?: %b", instructionDecoderDUT);
     if (instructionDecoderDUT === 0) begin
 	$display("instruction decoder failed tests");
     	allTestsPass <= 0;
@@ -148,7 +148,11 @@ always @(posedge instructionDecoderDone) begin
 end
 
 //now when 32bit mux test is done, check our succes wire
-always @(posedge mux32Done) begin
+always @(posedge mux32Done) begi
+
+
+
+
     $display("mux32 DUT passed?: %b", mux32DUT);
     if (mux32DUT === 0) begin
 	$display("32 bit mux file failed tests");

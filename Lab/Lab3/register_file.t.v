@@ -14,9 +14,9 @@ input startTests
   //instantiate the wires for the register
 wire WrEn;
 wire[31:0] Dw;
-wire[31:0] Aw;
-wire[31:0] Aa;
-wire[31:0] Ab;
+wire[4:0] Aw;
+wire[4:0] Aa;
+wire[4:0] Ab;
 wire[31:0] Da;
 wire[31:0] Db; // Enable writing of register when High
 wire clk;
