@@ -3,15 +3,15 @@ module register_file
 (
 input WrEn,
 input[31:0] Dw,
-input[31:0] Aw,
-input[31:0] Aa,
-input[31:0] Ab,
+input[5:0] Aw,
+input[5:0] Aa,
+input[5:0] Ab,
 output reg[31:0] Da,
 output reg[31:0] Db,
 input clk 
 );
 
-reg [31:0] memory [31:0];
+reg [5:0] memory [31:0];
 
     always @(posedge clk) begin
         if(WrEn) begin //if we're writing to the register

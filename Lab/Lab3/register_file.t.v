@@ -14,9 +14,9 @@ input startTests
   //instantiate the wires for the register
 wire WrEn;
 wire[31:0] Dw;
-wire[31:0] Aw;
-wire[31:0] Aa;
-wire[31:0] Ab;
+wire[5:0] Aw;
+wire[5:0] Aa;
+wire[5:0] Ab;
 wire[31:0] Da;
 wire[31:0] Db; // Enable writing of register when High
 wire clk;
@@ -94,9 +94,9 @@ output reg 		dutpassed,	// Signal test result
 // Register File DUT connections
 output reg WrEn,
 output reg[31:0] Dw,
-output reg[31:0] Aw,
-output reg[31:0] Aa,
-output reg[31:0] Ab,
+output reg[5:0] Aw,
+output reg[5:0] Aa,
+output reg[5:0] Ab,
 input[31:0] Da,
 input[31:0] Db,
 output reg	clk
@@ -107,9 +107,9 @@ output reg	clk
   initial begin
     WrEn=0;
     Dw=32'd0;
-    Aw=32'd0;
-    Aa=32'd0;
-    Ab=32'd0;
+    Aw=5'd0;
+    Aa=5'd0;
+    Ab=5'd0;
     clk=0;
   end
 
@@ -122,11 +122,11 @@ output reg	clk
 
   // Test Case 0: 
   //   Write '69' to address 4, then read it back
-  Aw=32'd4;
+  Aw=5'd4;
   Dw=32'd69;
   WrEn=1;
-  Aa=32'd4;
-  Ab=32'd4;
+  Aa=5'd4;
+  Ab=5'd4;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
 
   // Verify expectations and report test result
@@ -137,11 +137,11 @@ output reg	clk
   
   // Test Case 1: 
   //   attempt to Write '69' to address 0, should read back 0
-  Aw=32'd0;
+  Aw=5'd0;
   Dw=32'd69;
   WrEn=1;
-  Aa=32'd0;
-  Ab=32'd0;
+  Aa=5'd0;
+  Ab=5'd0;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
 
   // Verify expectations and report test result
@@ -152,11 +152,11 @@ output reg	clk
   
   // Test Case 2: 
   //   write 420 to address 25, then read it back and read 69 from address 4
-  Aw=32'd25;
+  Aw=5'd25;
   Dw=32'd420;
   WrEn=1;
-  Aa=32'd4;
-  Ab=32'd25;
+  Aa=5'd4;
+  Ab=5'd25;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
 
   // Verify expectations and report test result
@@ -167,11 +167,11 @@ output reg	clk
 
  // Test Case 3: 
   //   test to see if the WrEn flag works
-  Aw=32'd25;
+  Aw=5'd25;
   Dw=32'd42;
   WrEn=0;
-  Aa=32'd25;
-  Ab=32'd25;
+  Aa=5'd25;
+  Ab=5'd25;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
 
   // Verify expectations and report test result

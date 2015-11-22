@@ -1,7 +1,7 @@
-vlog -reportprogress 500 -work work datamemory.t.v datamemory.v register_file.t.v register_file.v instructiondecoder.t.v instructiondecoder.v mux32.t.v mux5.t.v pc_register.t.v ra_register.t.v alu_lab1.t.v shift_left.t.v concatenate.t.v sign_extend.t.v allModules.t.v
+vlog -reportprogress 500 -work work datamemory.t.v datamemory.v register_file.t.v register_file.v instructiondecoder.t.v instructiondecoder.v mux32.t.v mux32.v mux5.t.v mux5.v pc_register.t.v pc_register.v ra_register.t.v ra_register.v alu_lab1.t.v alu_lab1.v shift_left.t.v shift_left.v concatenate.t.v concatenate.v sign_extend.t.v sign_extend.v allModules.t.v
 vsim -voptargs="+acc" allTestBenchesHarness
 
-add wave -position insertpoint  \
+add wave -position insertpoint \
 sim:/allTestBenchesHarness/startTests \
 sim:/allTestBenchesHarness/dataMemoryDUT \
 sim:/allTestBenchesHarness/dataMemoryDone \
