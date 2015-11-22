@@ -201,7 +201,54 @@ concatenate cpu_concat(
 	);
 
 //jump mux
+mux32 jump_mux(
+	jump_mux_out,
+	jump_cntrl,
+	branch_mux_to_jump_mux,
+	concat_to_jump
+	);
 
+//jr mux
+mux32 jr_mux(
+	pc_new,
+	jr_cntrl,
+	jump_mux_out,
+	ra_out
+	);
+
+//pc
+pc_register cpu_pc(
+	pc_new,
+	pc_out
+	);
+
+
+//lsw mux
+mux32 lsw_mux(
+	datamem_addr,
+	lsw_cntrl,
+	alu_res,
+	sign_ext_imm_out
+	);
+
+//data memory
+datamemory cpu_datamem(
+	clk,
+	datamem_out,
+	datamem_addr,
+	mem_write_cntrl,
+	db_reg
+	);
+
+//mem to reg mux
+
+mux32 mem_to_reg_mux(
+	dw_reg,
+	mem_to_reg_cntrl,
+	alu_res,
+	datamem_out
+	);
 
 
 endmodule
+
