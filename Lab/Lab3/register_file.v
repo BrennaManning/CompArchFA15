@@ -3,9 +3,9 @@ module register_file
 (
 input WrEn,
 input[31:0] Dw,
-input[5:0] Aw,
-input[5:0] Aa,
-input[5:0] Ab,
+input[4:0] Aw,
+input[4:0] Aa,
+input[4:0] Ab,
 output reg[31:0] Da,
 output reg[31:0] Db,
 input clk 
