@@ -151,11 +151,11 @@ output reg clk
   
   // Test Case 2: 
   //   write 420 to address 25, then read it back and read 69 from address 4
-  Aw=5'd15;
+  Aw=5'd25;
   Dw=32'd420;
   WrEn=1; 
   Aa=5'd4;
-  Ab=5'd15;
+  Ab=5'd25;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
 $display("Register error checking - Aw is %d, Ab is %d", Aw, Ab);
   // Verify expectations and report test result

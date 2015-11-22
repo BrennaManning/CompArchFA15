@@ -11,7 +11,7 @@ output reg[31:0] Db,
 input clk 
 );
 
-reg [31:0] memory [5:0];
+reg [31:0] memory [32:0];
 
     always @(posedge clk) begin
         if(WrEn) begin //if we're writing to the register
