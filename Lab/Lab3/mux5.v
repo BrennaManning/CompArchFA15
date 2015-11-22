@@ -1,9 +1,9 @@
 //general purpose 2 input 32bit mux
 module mux5(
-	output reg[5:0] muxout,
+	output reg[4:0] muxout,
 	input muxcontrol,
-	input [5:0] muxin1,
-	input [5:0] muxin2
+	input [4:0] muxin1,
+	input [4:0] muxin2
 	);
 	
 

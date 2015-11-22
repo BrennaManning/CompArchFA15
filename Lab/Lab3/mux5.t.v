@@ -6,10 +6,10 @@ module mux5testharness(
     output reg testDone,
     input startTests);
 
-    wire [5:0] muxout;
+    wire [4:0] muxout;
     wire muxcontrol;
-    wire [5:0] muxin1;
-    wire [5:0] muxin2;
+    wire [4:0] muxin1;
+    wire [4:0] muxin2;
 	
   
 
