@@ -94,12 +94,12 @@ output reg 		dutpassed,	// Signal test result
 // Register File DUT connections
 output reg WrEn,
 output reg[31:0] Dw,
-output reg[5:0] Aw,
-output reg[5:0] Aa,
-output reg[5:0] Ab,
+output reg[4:0] Aw,
+output reg[4:0] Aa,
+output reg[4:0] Ab,
 input[31:0] Da,
 input[31:0] Db,
-output reg	clk
+output reg clk
 );
 
 
@@ -132,7 +132,7 @@ output reg	clk
   // Verify expectations and report test result
   if((Da !== 69) || (Db !== 69)) begin
     dutpassed = 0;  // Set to 'false' on failure
-    $display("Test case 0 failed");
+    $display("Register File test case 0 failed, da=%b", Da);
   end
   
   // Test Case 1: 
@@ -143,26 +143,25 @@ output reg	clk
   Aa=5'd0;
   Ab=5'd0;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
-
   // Verify expectations and report test result
   if((Da !== 0) || (Db !== 0)) begin
     dutpassed = 0;  // Set to 'false' on failure
-    $display("Test case 1 failed");
+    $display("Register File test case 1 failed");
   end
   
   // Test Case 2: 
   //   write 420 to address 25, then read it back and read 69 from address 4
-  Aw=5'd25;
+  Aw=5'd15;
   Dw=32'd420;
-  WrEn=1;
+  WrEn=1; 
   Aa=5'd4;
-  Ab=5'd25;
+  Ab=5'd15;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
-
+$display("Register error checking - Aw is %d, Ab is %d", Aw, Ab);
   // Verify expectations and report test result
   if((Da !== 69) || (Db !== 420)) begin
     dutpassed = 0;  // Set to 'false' on failure
-    $display("Test case 2 failed");
+    $display("Register file Test case 2 failed, Da=%b, Db=%b",Da, Db);
   end
 
  // Test Case 3: 
@@ -177,7 +176,7 @@ output reg	clk
   // Verify expectations and report test result
   if((Da !== 420) || (Db !== 420)) begin
     dutpassed = 0;  // Set to 'false' on failure
-    $display("Test case 3 failed");
+    $display("Register file Test case 3 failed, Da=%b",Da);
   end
 
   // All done!  Wait a moment and signal test completion.

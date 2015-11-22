@@ -148,11 +148,7 @@ always @(posedge instructionDecoderDone) begin
 end
 
 //now when 32bit mux test is done, check our succes wire
-always @(posedge mux32Done) begi
-
-
-
-
+always @(posedge mux32Done) begin
     $display("mux32 DUT passed?: %b", mux32DUT);
     if (mux32DUT === 0) begin
 	$display("32 bit mux file failed tests");
