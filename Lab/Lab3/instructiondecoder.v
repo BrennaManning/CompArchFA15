@@ -196,7 +196,7 @@ module instructiondecoder(
  	  	//ADDI
  	if (instruction [31:26] == 6'b100000)begin
 		jal = 1'b0;
- 		regdst = 1'b1; //R-Type
+ 		regdst = 1'b0; //R-Type
  		branch = 1'b0;
  		jump = 1'b0;
  		jr = 1'b0;
