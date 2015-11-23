@@ -15,11 +15,11 @@ module high_level_cpu(
 	input clk
 	);
 
-reg [25:0]		instr_to_concat;
-reg [15:0]		instr_to_sign_ext;
+reg  [25:0]		instr_to_concat;
+reg  [15:0]		instr_to_sign_ext;
 reg  [4:0]		instr_rd;
-reg [4:0]		instr_rt;
-reg [4:0]		instr_rs;
+reg  [4:0]		instr_rt;
+reg  [4:0]		instr_rs;
 wire [31:0]		instr_to_decoder;
 wire [31:0]		sign_ext_imm_out;
 wire [31:0]		pc_out;
@@ -57,7 +57,7 @@ wire [2:0] 	alu_op_cntrl;
 wire 		alu_src_cntrl;
 wire 		reg_wr_cntrl;
 
-reg [2:0] 	adderop;
+reg  [2:0] 	adderop;
 reg 		adder1a;
 
 wire 		adderscarry;
