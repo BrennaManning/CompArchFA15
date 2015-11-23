@@ -1,26 +1,26 @@
-`include al_lab1.v
-`include concatenate.v
-`include datamemory.v
-`include instruction_memory.v
-`include instructiondecoder.v
-`include mux32.v
-`include pc_register.v
-`include ra_register.v
-`include register_file.v
-`include shift_left.v
-`include sign_extend.v
+`include "alu_lab1.v"
+`include "concatenate.v"
+`include "datamemory.v"
+`include "instruction_memory.v"
+`include "instructiondecoder.v"
+`include "mux32.v"
+`include "pc_register.v"
+`include "ra_register.v"
+`include "register_file.v"
+`include "shift_left.v"
+`include "sign_extend.v"
 
 module high_level_cpu(
 	input [31:0] instruction,
 	input clk
 	);
 
-wire [25:0]		instr_to_concat;
-wire [15:0]		instr_to_sign_ext;
-wire [4:0]		instr_rd;
-wire [4:0]		instr_rt;
-wire [4:0]		instr_rs;
-wire [31:0]		instr_to_decoder:
+reg [25:0]		instr_to_concat;
+reg [15:0]		instr_to_sign_ext;
+reg  [4:0]		instr_rd;
+reg [4:0]		instr_rt;
+reg [4:0]		instr_rs;
+wire [31:0]		instr_to_decoder;
 wire [31:0]		sign_ext_imm_out;
 wire [31:0]		pc_out;
 wire [3:0]		pc_to_concat;
@@ -57,21 +57,23 @@ wire [2:0] 	alu_op_cntrl;
 wire 		alu_src_cntrl;
 wire 		reg_wr_cntrl;
 
-wire [2:0] 	adderop;
-wire 		adder1a;
+reg [2:0] 	adderop;
+reg 		adder1a;
 
 wire 		adderscarry;
 wire 		adderszero;
 wire 		addersoverflow;
 
-instr_rs = [25:21] instruction;
-instr_rt = [20:16] instruction;
-instr_rd = [15:11] instruction;
-instr_to_sign_ext = [15:0] instruction;
-instr_to_concat = [25:0] instruction;
+initial begin
+	instr_rd = instruction[15:11];
+	instr_rt = instruction[20:16];
+	instr_rs = instruction[25:21];
+	instr_to_sign_ext = instruction[15:0];
+	instr_to_concat = instruction[25:0];
 
-adderop = 3'b000;
-adder1a = 32'd4;
+	adderop = 3'b000;
+	adder1a = 32'd4;
+end
 
 //controls from instruction
 instructiondecoder cpu_instructiondecoder(
