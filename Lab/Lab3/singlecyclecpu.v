@@ -10,63 +10,59 @@
 `include shift_left.v
 `include sign_extend.v
 
-
-//currently just inputs and wires based on the day 10 slide 47
 module high_level_cpu(
 	input [31:0] instruction,
 	input clk
-);
+	);
 
-wire [25:0] instr_to_concat;
-wire [15:0] instr_to_sign_ext;
-wire [4:0] instr_rd;
-wire [4:0] instr_rt;
-wire [4:0}instr_rs;
-wire 31:0] instr_to_decoder:
-wire [31:0] sign_ext_imm_out;
-wire [31:0] pc_out;
-wire [3:0] pc_to_concat;
-wire [31:0] concat_to_jump;
-wire [31:0]jump_mux_out;
-wire [31:0] pc_new;
-wire [31:0] ra_out;
-wire [31:0] pc_plus4;
-wire [31:0] shift_left_out;
-wire [31:0] pc_plus4_plus_sl;
-wire branchand;
-wire [31:0] branch_mux_to_jump_mux;
-wire [4:0] aw_to_reg;
-wire [31:0] dw_reg;
-wire [31:0] da_reg_to_alu;
-wire [31:0] db_reg;
-wire [31:0] alu_mux_out;
-wire alu_zeroflag;
-wire alu_carryout;
-wire alu_overflow;
-wire [31:0] alu_res;
-wire [31:0] datamem_addr;
-wire [31:0] datamem_out;
+wire [25:0]		instr_to_concat;
+wire [15:0]		instr_to_sign_ext;
+wire [4:0]		instr_rd;
+wire [4:0]		instr_rt;
+wire [4:0]		instr_rs;
+wire [31:0]		instr_to_decoder:
+wire [31:0]		sign_ext_imm_out;
+wire [31:0]		pc_out;
+wire [3:0]		pc_to_concat;
+wire [31:0]		concat_to_jump;
+wire [31:0]		jump_mux_out;
+wire [31:0]		pc_new;
+wire [31:0]		ra_out;
+wire [31:0]		pc_plus4;
+wire [31:0]		shift_left_out;
+wire [31:0]		pc_plus4_plus_sl;
+wire			branchand;
+wire [31:0]		branch_mux_to_jump_mux;
+wire [4:0]		aw_to_reg;
+wire [31:0]		dw_reg;
+wire [31:0]		da_reg_to_alu;
+wire [31:0]		db_reg;
+wire [31:0]		alu_mux_out;
+wire			alu_zeroflag;
+wire			alu_carryout;
+wire			alu_overflow;
+wire [31:0]		alu_res;
+wire [31:0]		datamem_addr;
+wire [31:0]		datamem_out;
 
+wire 		lsw_cntrl;
+wire 		jal_cntrl;
+wire 		regdst_cntrl;
+wire 		branch_cntrl;
+wire 		jump_cntrl;
+wire 		jr_cntrl;
+wire 		mem_to_reg_cntrl;
+wire 		mem_write_cntrl;
+wire [2:0] 	alu_op_cntrl;
+wire 		alu_src_cntrl;
+wire 		reg_wr_cntrl;
 
-wire lsw_cntrl;
-wire jal_cntrl;
-wire regdst_cntrl;
-wire branch_cntrl;
-wire jump_cntrl;
-wire jr_cntrl;
-wire mem_to_reg_cntrl;
-wire mem_write_cntrl;
-wire [2:0] alu_op_cntrl;
-wire alu_src_cntrl;
-wire reg_wr_cntrl;
+wire [2:0] 	adderop;
+wire 		adder1a;
 
-wire [2:0] adderop;
-wire adder1a;
-
-wire adderscarry;
-wire adderszero;
-wire addersoverflow;
-
+wire 		adderscarry;
+wire 		adderszero;
+wire 		addersoverflow;
 
 instr_rs = [25:21] instruction;
 instr_rt = [20:16] instruction;
@@ -93,14 +89,12 @@ instructiondecoder cpu_instructiondecoder(
 	instruction
 	);
 
-
 //when reg dst is 1, select rd, when reg dst is 0 select rt
 mux5 reg_aw_mux(
 	aw_to_reg,
 	regdst_cntrl,
 	instr_rt,
 	instr_rd
-
 	);
 
 //register file
@@ -114,7 +108,6 @@ register_file cpu_reg_file(
 	db_reg, 
 	clk
 	);
-
 
 //sign extend immediate
 sign_extend cpu_sign_extend(
@@ -141,7 +134,6 @@ alu cpu_alu(
 	alu_op_cntrl
 	);
 
-
 //shift left
 shift_left cpu_shift_left(
 	sign_ext_imm_out,
@@ -159,9 +151,7 @@ alu cpu_adder1(
 	adderop
 	);
 
-
 //ra register
-
 ra_register cpu_ra(
 	pc_plus4,
 	jal_cntrl,
@@ -169,7 +159,6 @@ ra_register cpu_ra(
 	);
 
 //adder 2
-
 alu cpu_adder2(
 	pc_plus4_plus_sl,
 	adderscarry,
@@ -181,7 +170,6 @@ alu cpu_adder2(
 	);
 
 //branch and gate
-
 `AND(branchand, branch_cntrl, alu_zeroflag);
 
 //branch mux
@@ -193,7 +181,6 @@ mux32 branch_mux(
 	);
 
 //concatenate
-
 concatenate cpu_concat(
 	concat_to_jump,
 	pc_to_concat,
@@ -222,7 +209,6 @@ pc_register cpu_pc(
 	pc_out
 	);
 
-
 //lsw mux
 mux32 lsw_mux(
 	datamem_addr,
@@ -241,7 +227,6 @@ datamemory cpu_datamem(
 	);
 
 //mem to reg mux
-
 mux32 mem_to_reg_mux(
 	dw_reg,
 	mem_to_reg_cntrl,
@@ -249,6 +234,4 @@ mux32 mem_to_reg_mux(
 	datamem_out
 	);
 
-
 endmodule
-
