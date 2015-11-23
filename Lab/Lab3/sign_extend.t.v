@@ -106,6 +106,7 @@ module sign_extend_test_bench(
 	// if(dutpassed == 1)begin
 	// 	$display("Sign Extend passed!");
 	// end
+	
 	//All done! Short delay and then signal that the test is completed
 	#5
 	endtest = 1;
