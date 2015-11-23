@@ -189,6 +189,24 @@ module instructiondecoder(
  		regwrite = 1'b1;
  		lsw = 1'b0;
  	end
+
+
+
+
+ 	  	//ADDI
+ 	if (instruction [31:26] == 6'b001000)begin
+		jal = 1'b0;
+ 		regdst = 1'b0; //
+ 		branch = 1'b0;
+ 		jump = 1'b0;
+ 		jr = 1'b0;
+ 		memtoreg = 1'b0; //Writing to Reg from ALU not mem
+ 		memwrite = 1'b0;
+ 		aluop = 3'b000;
+ 		alusrc = 1'b0; //R-Type
+ 		regwrite = 1'b1;
+ 		lsw = 1'b0;
+ 	end
 	end
 
  		

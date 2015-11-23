@@ -8,7 +8,7 @@ module instruction_memory(
 	);
 	
 	reg [31:0] memory[1023:0];
-	initial $readmemh("file.dat", memory);
+	initial $readmemh("patrick_team_asm.dat", memory);
 	assign instr_mem_out = memory[address];
 
 endmodule
