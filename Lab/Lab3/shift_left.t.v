@@ -1,4 +1,5 @@
-`include "shift_left.v"
+//`include "shift_left.v"
+
 module shift_left_test_bench_harness(
 output reg dutPassed,
 output reg testDone,
@@ -39,7 +40,7 @@ input startTests
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
 		dutPassed = dutpassed;
-		$display("DUT passed?: %b", dutpassed);
+		//$display("Shift Left DUT passed?: %b", dutpassed);
 		testDone = endtest;
 	end
 
@@ -63,7 +64,7 @@ module shift_left_test_bench(
 
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
-		$display("Testing shift left now...");
+		$display("Testing Shift Left now...");
 		endtest = 0;
 		dutpassed = 1;
 		#10
@@ -71,32 +72,37 @@ module shift_left_test_bench(
 	//test case 0
 	//	all ones moved over two left has two zeros at the end
 	sign_ext = 34'b11111111111111111111111111111111;
-	$display("Testing case 0...");
+	//$display("Testing shift left case 0...");
 	#10
 	if (shift_left_out !== 34'b11111111111111111111111111111100) begin
 		dutpassed = 0;
-		$display("Test case 0 failed");
+		$display("Test case 0 shift left failed");
 	end
 
 	//test case 1
 	//	zero moved over two left is still zero
 	sign_ext = 34'b00000000000000000000000000000000;
-	$display("Testing case 1...");
+	//$display("Testing shift left case 1...");
 	#10	
 	if (shift_left_out !== 34'b00000000000000000000000000000000) begin
 		dutpassed = 0;
-		$display("Test case 1 failed");
+		$display("Test case 1 shift left failed");
 	end
 
 	//test case 2
 	//	a mixture of 0s and 1s still adds two zeros on the right
 	sign_ext = 34'b11001101011010101010010110101101;
-	$display("Testing case 2...");
+	//$display("Testing shift left case 2...");
 	#10	
 	if (shift_left_out !== 34'b00110101101010101001011010110100) begin
 		dutpassed = 0;
-		$display("Test case 2 failed");
+		$display("Test case 2 shift left failed");
 	end
+
+    if (dutpassed == 1) begin
+      // $display("Shift Left passed!");
+      endtest = 1;
+    end
 
 	//All done! Short delay and then signal that the test is completed
 	#5

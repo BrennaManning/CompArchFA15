@@ -1,4 +1,4 @@
-`include "alu_lab1.v"
+//`include "alu_lab1.v"
 
 module alu_test_bench_harness(
 	output reg dutPassed,
@@ -55,7 +55,7 @@ module alu_test_bench_harness(
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
 		dutPassed = dutpassed;
-		$display("DUT passed?: %b", dutpassed);
+		//$display("ALU DUT passed?: %b", dutpassed);
 		testDone = endtest;
 	end
 
@@ -86,11 +86,10 @@ module alu_test_bench(
 
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
-		$display("Testing alu now...");
+		$display("Testing ALU now...");
 		endtest = 0;
 		dutpassed = 1;
 		#10
-
 
 	//test adder
 	//0+0
@@ -132,7 +131,6 @@ module alu_test_bench(
 		dutpassed = 0;
 		$display("Adder Failed neg + neg");
 	end
-
 
 
 
@@ -272,15 +270,13 @@ module alu_test_bench(
 		$display("SLT Failed neg slt neg");
 	end
 
-
-
-
-
+	// if(dutpassed == 1)begin
+	// 	$display("ALU passed!");
+	// end
 
 // Short delay and then signal that the test is completed
 	#5
 	endtest = 1;
-
 end
 
 endmodule

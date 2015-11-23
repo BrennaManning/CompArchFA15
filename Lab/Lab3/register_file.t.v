@@ -65,7 +65,7 @@ wire clk;
   // Display test results ('dutpassed' signal) once 'endtest' goes high
   always @(posedge endtest) begin
     dutPassed = dutpassed;
-    $display("DUT passed?: %b", dutpassed);
+    //$display("Register File DUT passed?: %b", dutpassed);
     testDone = endtest;
   end
 
@@ -115,7 +115,7 @@ output reg clk
 
   // Once 'begintest' is asserted, start running test cases
   always @(posedge begintest) begin
-    $display("testing register file now");
+    $display("Testing Register File now...");
     endtest = 0;
     dutpassed = 1;
     #10
@@ -157,7 +157,7 @@ output reg clk
   Aa=5'd4;
   Ab=5'd25;
   #5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;	// Generate double
-$display("Register error checking - Aw is %d, Ab is %d", Aw, Ab);
+  //$display("Register error checking - Aw is %d, Ab is %d", Aw, Ab);
   // Verify expectations and report test result
   if((Da !== 69) || (Db !== 420)) begin
     dutpassed = 0;  // Set to 'false' on failure
@@ -178,6 +178,11 @@ $display("Register error checking - Aw is %d, Ab is %d", Aw, Ab);
     dutpassed = 0;  // Set to 'false' on failure
     $display("Register file Test case 3 failed, Da=%b",Da);
   end
+
+    if (dutpassed == 1) begin
+      // $display("Register File passed!");
+      endtest = 1;
+    end
 
   // All done!  Wait a moment and signal test completion.
   #5

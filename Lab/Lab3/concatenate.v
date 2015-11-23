@@ -1,5 +1,5 @@
 module concatenate(
-	output reg [32:0] out,
+	output reg [31:0] out,
 	input [3:0] pc,
 	input [25:0] instr
 	);

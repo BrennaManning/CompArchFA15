@@ -184,7 +184,7 @@ module instructiondecoder(
  		jr = 1'b0;
  		memtoreg = 1'b0; //Writing to Reg from ALU not mem
  		memwrite = 1'b0;
- 		aluop = 2'b011;
+ 		aluop = 3'b011;
  		alusrc = 1'b1; //R-Type
  		regwrite = 1'b1;
  		lsw = 1'b0;

@@ -1,6 +1,8 @@
 //test bench for $ra register
 //comparch lab 3
-`include "ra_register.v"
+
+//`include "ra_register.v"
+
 module ra_register_test_bench_harness(
 	output reg dutPassed,
 	output reg testDone,
@@ -43,7 +45,7 @@ module ra_register_test_bench_harness(
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
 		dutPassed = dutpassed;
-		$display("DUT passed?: %b", dutpassed);
+		//$display("$RA Register DUT passed?: %b", dutpassed);
 		testDone = endtest;
 	end
 
@@ -69,7 +71,7 @@ module ra_reg_test_bench(
 
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
-		$display("Testing $RA register now...");
+		$display("Testing $RA Register now...");
 		endtest = 0;
 		dutpassed = 1;
 		#10
@@ -78,23 +80,28 @@ module ra_reg_test_bench(
 	//	if the JAL is low, the reg in should not be written
 	jal = 0;
 	ra_reg_in = 34'd6;
-	$display("Testing case 0...");
+	//$display("Testing $RA register case 0...");
 	#10
 	if (ra_reg_out == 34'd6) begin
 		dutpassed = 0;
-		$display("Test case 0 failed");
+		$display("Test case 0 $RA register failed");
 	end
 
 	//test case 1
 	//	if the JAL is high, the register should write
 	jal = 1;
 	ra_reg_in = 34'd12;
-	$display("Testing case 1...");
+	//$display("Testing $RA register case 1...");
 	#10
 	if (ra_reg_out !== 34'd12) begin
 		dutpassed = 0;
-		$display("Test case 1 failed");
+		$display("Test case 1 $RA register failed");
 	end
+
+    if (dutpassed == 1) begin
+      // $display("$RA Register passed!");
+      endtest = 1;
+    end
 
 	//All done! Short delay and then signal that the test is completed
 	#5

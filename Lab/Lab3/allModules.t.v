@@ -149,6 +149,7 @@ end
 
 //now when 32bit mux test is done, check our succes wire
 always @(posedge mux32Done) begin
+    $display("-------------------RESULTS-------------------");     //separate testing from pass/fail results
     $display("mux32 DUT passed?: %b", mux32DUT);
     if (mux32DUT === 0) begin
 	$display("32 bit mux file failed tests");
@@ -228,10 +229,13 @@ initial begin
     #10;
     startTests=1;
     #1000;
-    if(allTestsPass === 1)
-            $display("all tests have succesfully passed. congrats");
+    if(allTestsPass === 1) begin
+            $display("-------------------CONCLUDE-------------------");     //separate our final output from the outputs of all modules
+            $display("All tests have succesfully passed. Congrats!");
+            $display("----------------------------------------------end");
+    end
     else
-	$display("at least one of your tests failed. take a look at the console to find which one");
+	$display("At least one of your tests failed. Take a look at the console to find which one.");
   end
 //=====================end of all tests===============================
 

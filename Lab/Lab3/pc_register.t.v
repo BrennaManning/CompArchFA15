@@ -1,6 +1,8 @@
 //test bench for the program counter register
 //comparch lab 3
-`include "pc_register.v"
+
+//`include "pc_register.v"
+
 module pc_register_test_bench_harness(
 output reg dutPassed,
 output reg testDone,
@@ -40,7 +42,7 @@ input startTests
 	//final test results displayed when 'endtest' is high
 	always @(posedge endtest) begin
 		dutPassed = dutpassed;
-		$display("DUT passed?: %b", dutpassed);
+		//$display("PC Register DUT passed?: %b", dutpassed);
 		testDone = endtest;
 	end
 
@@ -77,8 +79,13 @@ module pc_reg_test_bench
 	#5	//delay for a little bit
 	if(pc_reg_out !== 32'd4) begin
 		dutpassed = 0;
-		$display("Test case 0 failed");
+		$display("Test case 0 PC register failed");
 	end
+
+    if (dutpassed == 1) begin
+      // $display("PC Register passed!");
+      endtest = 1;
+    end
 
 	//All done! Short delay and then signal that the test is completed
 	#5

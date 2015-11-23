@@ -1,5 +1,4 @@
-
-`include "instructiondecoder.v"
+//`include "instructiondecoder.v"
 
 module instructiondecodertestharness(
 output reg dutPassed,
@@ -15,7 +14,7 @@ input startTests
 	wire jr;
 	wire memtoreg;
 	wire memwrite;
-	wire [1:0] aluop;
+	wire [2:0] aluop;
 	wire alusrc;
 	wire regwrite;
 	wire lsw;
@@ -75,7 +74,7 @@ input startTests
   // Display test results ('dutpassed' signal) once 'endtest' goes high
   always @(posedge endtest) begin
     dutPassed = dutpassed;
-    $display("DUT passed?: %b", dutpassed);
+    //$display("Instruction Decoder DUT passed?: %b", dutpassed);
     testDone = endtest;
   end
 
@@ -98,7 +97,7 @@ input jump,
 input jr,
 input memtoreg,
 input memwrite,
-input [1:0] aluop,
+input [2:0] aluop,
 input alusrc,
 input regwrite,
 input lsw,
@@ -113,6 +112,7 @@ output reg [31:0] instruction
 	end
 
 	always @(posedge begintest) begin
+        $display("Testing Instruction Decoder now...");
     	endtest = 0;
     	dutpassed = 1;
     #10
@@ -200,9 +200,10 @@ output reg [31:0] instruction
 	$display("Test Case 11 Failed: Returned High when given false instruction");
     end
     #100
+    
     if (dutpassed == 1)begin
-	$display("Instruction decoder test bench passed");
-	endtest = 1;
+	// $display("Instruction Decoder passed!");
+	   endtest = 1;
     end
 
     end

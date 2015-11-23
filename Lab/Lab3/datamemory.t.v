@@ -57,7 +57,7 @@ input startTests
   // Display test results ('dutpassed' signal) once 'endtest' goes high
   always @(posedge endtest) begin
     dutPassed = dutpassed;
-    $display("DUT passed?: %b", dutpassed);
+    //$display("Data memory DUT passed?: %b", dutpassed);
     testDone = endtest;
   end
 
@@ -101,7 +101,10 @@ output reg		clk
 
   // Once 'begintest' is asserted, start running test cases
   always @(posedge begintest) begin
-    $display("testing datamemory now");
+    //separate our print statements from the "Loading work..." lines in the final module
+    $display("----------------------------------------------begin");
+    $display("-------------------TESTING-------------------");
+    $display("Testing Data Memory now...");
     endtest = 0;
     dutpassed = 1;
     #10
@@ -116,7 +119,7 @@ output reg		clk
   // Verify expectations and report test result
   if((dataOut !== 42) || (dataOut !== 42)) begin
     dutpassed = 0;	// Set to 'false' on failure
-    $display("Test case 0 failed");
+    $display("Test case 0 datamemory failed");
   end
   
    // Test Case 1: 
@@ -129,7 +132,7 @@ output reg		clk
   // Verify expectations and report test result
   if((dataOut !== 42) || (dataOut !== 42)) begin
     dutpassed = 0;	// Set to 'false' on failure
-    $display("Test case 1 failed");
+    $display("Test case 1 datamemory failed");
   end
   
    // Test Case 2: 
@@ -145,8 +148,12 @@ output reg		clk
   // Verify expectations and report test result
   if((dataOut !== 42) || (dataOut !== 42)) begin
     dutpassed = 0;	// Set to 'false' on failure
-    $display("Test case 2 failed");
+    $display("Test case 2 datameory failed");
   end
+
+  // if(dutpassed == 1)begin
+  //   $display("Data Memory passed!");
+  // end
 
   // All done!  Wait a moment and signal test completion.
   #5

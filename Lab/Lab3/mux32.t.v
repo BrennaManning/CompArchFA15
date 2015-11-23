@@ -1,5 +1,4 @@
-
-`include "mux32.v"
+//`include "mux32.v"
 
 module mux32testharness(
     output reg dutPassed,
@@ -12,8 +11,6 @@ module mux32testharness(
     wire [31:0] muxin2;
 	
   
-
-
   reg		begintest;	// Set High to begin testing register file
   wire		dutpassed;	// Indicates whether register file passed tests
 
@@ -49,11 +46,10 @@ module mux32testharness(
   always @(posedge endtest) begin
 	dutPassed = dutpassed;
 	testDone = endtest;
-    $display("DUT passed?: %b", dutpassed);
+    //$display("Mux 32 DUT passed?: %b", dutpassed);
   end
 
 endmodule
-
 
 
 module mux32testbench
@@ -74,34 +70,35 @@ output reg muxcontrol
 //Initialize Driver Signals
 	initial begin
 		muxcontrol = 32'd0;
-    	
 	end
 
 	always @(posedge begintest) begin
+      $display("Testing Mux32 now...");
     	endtest = 0;
     	dutpassed = 1;
     #10
 	
-
-    //TEST CASE 1: 
+  
+    //TEST CASE 0: 
     muxcontrol = 0;
 	
     if (muxout != muxin1)begin
     	dutpassed = 0;
-    	$display("Test Case 1 Failed");
+    	$display("Test Case 0 Mux32 Failed");
     end
     
-    //TEST CASE 2:
+    //TEST CASE 1:
     muxcontrol =1;
 
     if (muxout != muxin2) begin
-	dutpassed = 0;
-	$display("Test Case 2 Failed");
+      dutpassed = 0;
+      $display("Test Case 1 Mux32 Failed");
     end
 
-   if (dutpassed == 1) begin
-	$display("Mux testbench passed!");
-	endtest = 1;
-	end
+    if (dutpassed == 1) begin
+      // $display("Mux32 passed!");
+      endtest = 1;
+    end
+
 end
 endmodule

@@ -1,6 +1,7 @@
 //test bench for $ra register
 //comparch lab 3
-`include "concatenate.v"
+//`include "concatenate.v"
+
 module concatenate_test_bench_harness(
 	output reg dutPassed,
 	output reg testDone,
@@ -42,7 +43,7 @@ module concatenate_test_bench_harness(
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
 		dutPassed = dutpassed;
-		$display("DUT passed?: %b", dutpassed);
+		//$display("Concatenate DUT passed?: %b", dutpassed);
 		testDone = endtest;
 	end
 
@@ -68,7 +69,7 @@ module concatenate_test_bench(
 
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
-		$display("Testing concatenate now...");
+		$display("Testing Concatenate now...");
 		endtest = 0;
 		dutpassed = 1;
 		#10
@@ -76,26 +77,30 @@ module concatenate_test_bench(
 	//test case 0
 	pc = 0;
 	instr = 0;
-	$display("Testing case 0...");
+//	$display("Testing concatenate case 0...");
 	#10
 	if (out !== 0) begin
 		dutpassed = 0;
-		$display("Test case 0 failed");
+		$display("Test case 0 concatenate failed");
 	end
 
 	//test case 1
 	//	if the JAL is high, the register should write
 	pc = 4'b0011;
 	instr = 26'b10110101011100010000111111;
-	$display("Testing case 1...");
+//	$display("Testing concatenate case 1...");
 	#10
 	//concatenated
 	if (out !== 32'b00111011010101110001000011111100) begin
 		dutpassed = 0;
 		$display("concatenate = %b", out);
 		$display("Expected 00111011010101110001000011111100");
-		$display("Test case 1 failed");
+		$display("Test case 1 concatenate failed");
 	end
+
+	// if(dutpassed == 1)begin
+	// 	$display("Concatenate passed!");
+	// end
 
 	//All done! Short delay and then signal that the test is completed
 	#5

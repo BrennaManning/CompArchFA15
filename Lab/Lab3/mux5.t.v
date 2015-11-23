@@ -1,5 +1,4 @@
-
-`include "mux5.v"
+//`include "mux5.v"
 
 module mux5testharness(
     output reg dutPassed,
@@ -49,7 +48,7 @@ module mux5testharness(
   always @(posedge endtest) begin
 	dutPassed = dutpassed;
 	testDone = endtest;
-    $display("DUT passed?: %b", dutpassed);
+    //$display("Mux5 DUT passed?: %b", dutpassed);
   end
 
 endmodule
@@ -64,44 +63,46 @@ output reg 		endtest,	// Raise once test completes
 output reg 		dutpassed,	// Signal test result
 
 // Register File DUT connections
-input [5:0] muxout,
-output reg [5:0] muxin1,
-output reg [5:0] muxin2,
+input [4:0] muxout,
+output reg [4:0] muxin1,
+output reg [4:0] muxin2,
 output reg muxcontrol
 
 );
 
 //Initialize Driver Signals
 	initial begin
-		muxcontrol = 5'd0;
+		muxcontrol = 4'd0;
     	
 	end
 
 	always @(posedge begintest) begin
+      $display("Testing Mux5 now...");
     	endtest = 0;
     	dutpassed = 1;
     #10
 	
 
-    //TEST CASE 1: 
+    //TEST CASE 0: 
     muxcontrol = 0;
 	
     if (muxout != muxin1)begin
     	dutpassed = 0;
-    	$display("Test Case 1 Failed");
+    	$display("Test Case 0 Mux5 Failed");
     end
     
     //TEST CASE 2:
     muxcontrol =1;
 
     if (muxout != muxin2) begin
-	dutpassed = 0;
-	$display("Test Case 2 Failed");
+      dutpassed = 0;
+      $display("Test Case 1 Mux5 Failed");
     end
 
-   if (dutpassed == 1) begin
-	$display("Mux testbench passed!");
-	endtest = 1;
-	end
+    if (dutpassed == 1) begin
+      // $display("Mux5 passed!");
+      endtest = 1;
+    end
+
 end
 endmodule

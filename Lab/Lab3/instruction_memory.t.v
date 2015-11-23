@@ -35,7 +35,7 @@ module instruction_memory_test_bench_harness();
 	
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
-		$display("DUT passed?: %b", dutpassed);
+		//$display("Instruction Memory DUT passed?: %b", dutpassed);
 	end
 
 endmodule
@@ -58,23 +58,26 @@ module instr_mem_test_bench(
 
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
-		$display("Testing instruction memory now...");
+		$display("Testing Instruction Memory now...");
 		endtest = 0;
 		dutpassed = 1;
 		#10
 
 	//test case 0
-	//	needs real test cases!
 	address = 32'b0;
-	$display("Testing case 0...");
+	//$display("Testing instruction memory case 0...");
 	#10
 	$display(address);
 	$display(instr_mem_out);
 	if (instr_mem_out == 32'b0) begin
 		dutpassed = 0;
-		$display("Test case 0 failed");
+		$display("Test case 0 instruction memory failed");
 	end
 
+	// if(dutpassed == 1)begin
+	// 	$display("Instruction Memory passed!");
+	// end
+	
 	//All done! Short delay and then signal that the test is completed
 	#5
 	endtest = 1;

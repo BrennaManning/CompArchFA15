@@ -1,6 +1,7 @@
 //test bench for sign extension
 //comparch lab 3
-`include "sign_extend.v"
+
+//`include "sign_extend.v"
 
 module sign_extend_test_bench_harness(
 	output reg dutPassed,
@@ -41,7 +42,7 @@ module sign_extend_test_bench_harness(
 	//report final test results when endtest is high
 	always @(posedge endtest) begin
 		dutPassed = dutpassed;
-		$display("DUT passed?: %b", dutpassed);
+		//$display("Sign Extend DUT passed?: %b", dutpassed);
 		testDone = endtest;
 	end
 
@@ -65,7 +66,7 @@ module sign_extend_test_bench(
 
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
-		$display("Testing sign extend now...");
+		$display("Testing Sign Extend now...");
 		endtest = 0;
 		dutpassed = 1;
 		#10
@@ -73,48 +74,40 @@ module sign_extend_test_bench(
 	//test case 0
 	//	if the instruction is 0, the output should be all zeros
 	instruction = 16'b0010101010101010;
-	$display("Testing case 0...");
+//	$display("Testing sign extend case 0...");
 	#10
-	$display("binary instruction %b", instruction[15]);
 	
-	$display("binary sign_ext_out %b", sign_ext_out);
-	if (instruction[15] == 0) begin
-		$display("MSB is 0");
-	end
-	$display("sign ext %b", sign_ext_out);
 	#10
 	if (sign_ext_out !== 32'b00000000000000000010101010101010)begin
 		dutpassed = 0;
-		$display("Test case 0 failed");
+		$display("Test case 0 sign extend failed");
 	end
 
 	// //test case 1
 	// //	if the MSB of the instruction is one, the output should be sixteen zeros and then the instruction
 	 instruction = 16'b1001100110011001; //39,321
-	$display("Testing case 1...");
+//	$display("Testing sign extend case 1...");
 	 #10
 	if (sign_ext_out !== 32'b11111111111111111001100110011001) begin
 	 	dutpassed = 0;
-	 	$display("Test case 1 failed");
+	 	$display("Test case 1 sign extend failed");
 	 end
 
 	//test case 2
 	// //	if the MSB of the instruction is zero, output should be sixteen ones and then the instruction
 	 instruction = 16'b0101110110101000; //23,976
 	#10
-	 $display("Testing case 2...");
+//	 $display("Testing sign extend case 2...");
 	if (sign_ext_out !== 32'b00000000000000000101110110101000) begin
-		$display("Test case 2 %b", sign_ext_out);
 	 	dutpassed = 0;
-	 	$display("Test case 2 failed");
+	 	$display("Test case 2 sign extend failed");
 	 end
 	
-	if(dutpassed == 1)begin
-	$display("Sign Extend Passed!");
-	end
+	// if(dutpassed == 1)begin
+	// 	$display("Sign Extend passed!");
+	// end
 	//All done! Short delay and then signal that the test is completed
 	#5
-	$display(endtest);
 	endtest = 1;
 
 end
