@@ -54,7 +54,7 @@ wire regdst_cntrl;
 wire branch_cntrl;
 wire jump_cntrl;
 wire jr_cntrl;
-wire mem_to_reg_cntrl;https://github.com/BrennaManning/CompArchFA15/blob/master/Lab/Lab3/final_single_cycle_cpu.png?raw=true
+wire mem_to_reg_cntrl;
 wire mem_write_cntrl;
 wire [2:0] alu_op_cntrl;
 wire alu_src_cntrl;
