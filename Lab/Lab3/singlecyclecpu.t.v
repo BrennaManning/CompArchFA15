@@ -14,7 +14,7 @@ module singlecyclecpu_test_bench_harness();
 	wire dutpassed;
 
 	//create an instance of the singlecyclecpu
-	singlecyclecpu dut(
+	high_level_cpu dut(
 		.instruction(instruction),
 		.clk(clk)
 		);
@@ -60,6 +60,9 @@ module single_cycle_test_bench(
 		clk = 0;
 	end
 
+	always
+		#5 clk = !clk;
+
 	//once 'begintest' is high, run test cases
 	always @(posedge begintest) begin
 		$display("Testing Single Cycle CPU now...");
@@ -68,12 +71,19 @@ module single_cycle_test_bench(
 		#10
 
 	//test case 0
-	//	this is just a baby test, where i check to see if the instruction is still the instruction
+	//	this is just a baby test, where I check to see if the instruction is still the instruction
 	instruction = 32'd16;
+	// dut.
+	// initial $readmemh("patrick_team_asm.dat", memory);
+
 	$display("Testing singlecyclecpu case 0...");
-  	#5 clk=1; #5 clk=0; #5 clk=1; #5 clk=0;
+
 	#10
 	$display(instruction);
+	dut.da_reg_to_alu = 32'd4;
+	dut.db_reg = 32'd6;
+	dut.alu_src_cntrl = 1'd1;
+	$display(dut.alu_res);
 	if (instruction != 32'd16) begin
 		dutpassed = 0;
 		$display("Test case 0 singlecyclecpu failed");

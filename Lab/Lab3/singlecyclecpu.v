@@ -58,7 +58,7 @@ wire 		alu_src_cntrl;
 wire 		reg_wr_cntrl;
 
 reg  [2:0] 	adderop;
-reg 		adder1a;
+reg  [31:0]	adder1a;
 
 wire 		adderscarry;
 wire 		adderszero;
@@ -74,6 +74,12 @@ initial begin
 	adderop = 3'b000;
 	adder1a = 32'd4;
 end
+
+//instruction memory
+instruction_memory cpu_instructionmemory(
+	pc_out,
+	instruction
+	);
 
 //controls from instruction
 instructiondecoder cpu_instructiondecoder(
